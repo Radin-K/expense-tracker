@@ -64,7 +64,7 @@ def main():
                            "to reports section 'r'\n"
                            "to get an exel copy 'e'\n"
                             "to quit 'q':"))
-        if navigation != "a" or "v" or "r" or "e" or not navigation or not navigation.isalpha():
+        if not navigation or not navigation.isalpha() or navigation not in ["a", "v", "r", "e"]:
             print("invalid input")
             continue
         elif navigation == "a":
@@ -87,7 +87,7 @@ def main():
                                         "Show spending by category: '2'\n"
                                         "Show highest expense: '3'\n"
                                         "back to main menu: '4'\n"))
-                if reports_menu != "1" or "2" or "3" or "4":
+                if reports_menu not in ["1", "2", "3", "4"]:
                     print("invalid input")
                     continue
                 elif reports_menu == "1":
@@ -108,4 +108,5 @@ def main():
             print("successfully exported to excel")
 
 if __name__ == "__main__":
+
     main()
