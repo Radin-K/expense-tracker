@@ -29,16 +29,20 @@ def show_total_spending():
     with open(FILENAME, "r", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile)
         print(sum([float(i["amount"]) for i in reader]))
-def spending_by_category(category):
+def spending_by_category(category=None):
+    totals = {}
     with open(FILENAME, "r", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile)
-        if category not in [i[category] for i in reader]:
-            print("Category not found")
-        else:
-            for row in reader:
-                if row["category"] == category:
-                    print(row["date"], row["amount"], row["category"], row["description"])
-            print(f"total spending by {row[category]}:{sum([i["amount"] for i in reader if i["category"] == category])}")
+        for row in reader:
+            cat = row['category']
+            amount = float(row['amount'])
+            totals[cat] = totals.get(cat, 0) + amount
+
+    if category:  # specific category requested
+        print(f"Total spending in {category}: {totals.get(category, 0)}")
+    else:  # show all
+        for cat, total in totals.items():
+            print(f"Total spending in {cat}: {total}")
 def show_highest_expense():
     with open(FILENAME, "r", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile)
@@ -111,5 +115,6 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
