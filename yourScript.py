@@ -44,12 +44,12 @@ def spending_by_category(category=None):
         for cat, total in totals.items():
             print(f"Total spending in {cat}: {total}")
 def show_highest_expense():
-    with open(FILENAME, "r", encoding="utf-8") as csvfile:
-        reader = csv.DictReader(csvfile)
-        sorted_expenses = sorted([i["amount"] for i in reader])
-        for row in reader:
-            if sorted_expenses[0] == row["amount"]:
-                print("your highest expense:", row["date"], row["amount"], row["category"], row["description"])
+        with open(FILENAME, "r", encoding="utf-8") as csvfile:
+        reader = list(csv.DictReader(csvfile)) 
+
+        highest = max(reader, key=lambda row: float(row["amount"]))
+
+        print("Your highest expense:", highest["date"], highest["amount"], highest["category"], highest["description"])
 def export_to_excel(csvfile, excelfile):
     wb = Workbook()
     ws = wb.active
@@ -68,7 +68,7 @@ def main():
                            "to reports section 'r'\n"
                            "to get an exel copy 'e'\n"
                             "to quit 'q':"))
-        if not navigation or not navigation.isalpha() or navigation not in ["a", "v", "r", "e"]:
+        if not navigation or not navigation.isalpha() or navigation not in ["a", "v", "r", "e", "q"]:
             print("invalid input")
             continue
         elif navigation == "a":
@@ -115,6 +115,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
