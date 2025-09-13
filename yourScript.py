@@ -71,7 +71,7 @@ def main():
             print("q to quit")
             while True:
                 date = input("enter date(YYYY-MM-DD): ")
-                amount = input("enter amount(TOMAN): ")
+                amount = input("enter amount: ")
                 category = input("enter category: ")
                 description = input("enter description: ")
                 if date == "q" or amount == "q" or category == "q" or description == "q":
@@ -110,3 +110,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
