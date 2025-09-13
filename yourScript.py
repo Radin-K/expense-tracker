@@ -74,7 +74,7 @@ def main():
                 amount = input("enter amount: ")
                 category = input("enter category: ")
                 description = input("enter description: ")
-                if date == "q" or amount == "q" or category == "q" or description == "q":
+                if date.lower() == "q" or amount.lower() == "q" or category.lower() == "q" or description.lower() == "q":
                     break
                 else:
                     add_expense(date=date, amount=amount, category=category, description=description)
@@ -106,8 +106,10 @@ def main():
         elif navigation == "e":
             export_to_excel(csvfile=FILENAME,excelfile=h / "Expenses" / "expense.xlsx")
             print("successfully exported to excel")
-
+        elif navigation == "q"
+            break
 if __name__ == "__main__":
 
     main()
+
 
